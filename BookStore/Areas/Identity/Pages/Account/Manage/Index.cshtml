@@ -1,0 +1,62 @@
+﻿@page
+@model IndexModel
+<body>
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">My Account</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <img style="width:500px;height:300px;" src="images/profilepicture.jpg" alt="Image placeholder" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <u><h2 class="text-black">Account Info</h2></u>
+                    <p>Username:</p>
+                    <p>Last Name:</p>
+                    <p>First Name:</p>
+                    <p>E-Mail:</p>
+                    <p>Birthdate:</p>
+                    <p>Address:</p>
+
+                </div>
+            </div>
+            <br>
+            <p>
+                <a href="editprofile.html" class="buy-now btn btn-sm btn-primary">Edit profile</a>
+                <a href="editmovielist.html" class="buy-now btn btn-sm btn-primary">Edit movie list</a>
+            </p>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <i><p><h2> Last movies rented:</p></h2></i>
+                    <p> Movie1 </p>
+                    <p> Movie1 </p>
+                    <p> Movie1 </p>
+                    <p> Movie1 </p>
+                    <p> Movie1 </p>
+
+                </div>
+
+                <div class="col-md-6">
+                    <i><p><h2> Last movies bought:</p></h2></i>
+                    <p> Movie2 </p>
+                    <p> Movie2 </p>
+                    <p> Movie2 </p>
+                    <p> Movie2 </p>
+                    <p> Movie2 </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
