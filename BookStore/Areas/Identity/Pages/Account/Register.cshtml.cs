@@ -58,6 +58,31 @@ namespace BookStore.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Birth Date")]
+            public DateTime DateOfBirth { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Gender")]
+            public string GenderType { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -72,15 +97,16 @@ namespace BookStore.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new BookStoreUser { UserName = Input.Email, Email = Input.Email };
+                var user = new BookStoreUser { FirstName = Input.FirstName, LastName = Input.LastName, DateOfBirth = Input.DateOfBirth, GenderType = Input.GenderType, UserName = Input.Email, Email = Input.Email, Address = Input.Address };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    await _userManager.AddToRoleAsync(user, "User");
+                    TempData["Success"] = "User " + Input.Email + " was registered successfully!";
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email});
                     }
                     else
                     {

@@ -8,5 +8,8 @@ namespace BookStore.Repositories.Interface
 {
     public interface IBookRepository : IRepository<Book>
     {
+        List<Book> GetBookByName(string name);
+        List<Book> GetBooksByType(Guid id);
+        List<Book> GetBooksByCategory(Guid id);
     }
 }

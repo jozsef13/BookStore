@@ -13,5 +13,10 @@ namespace BookStore.Repositories.Implementation
         public PublisherRepository(BookStoreDbContext context) : base(context)
         {
         }
+
+        public Publisher GetPublisherByName(string publisherName)
+        {
+            return context.Publishers.SingleOrDefault(p => p.Name == publisherName);
+        }
     }
 }

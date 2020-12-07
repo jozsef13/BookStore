@@ -1,4 +1,5 @@
 ﻿using BookStore.Models;
+using BookStore.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,14 +13,23 @@ namespace BookStore.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IBookService bookService;
 
-        public HomeController()
+        public HomeController(IBookService bookService)
         {
+            this.bookService = bookService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Book> books = bookService.GetAllBooks();
+            List<Book> modelBooks = books;
+            if (books.Count() > 6)
+            {
+                modelBooks = books.Skip(Math.Max(0, books.Count() - 6)).ToList();
+            }
+
+            return View(modelBooks);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

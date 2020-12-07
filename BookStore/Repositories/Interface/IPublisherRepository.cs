@@ -8,5 +8,6 @@ namespace BookStore.Repositories.Interface
 {
     public interface IPublisherRepository : IRepository<Publisher>
     {
+        Publisher GetPublisherByName(string publisherName);
     }
 }

@@ -13,5 +13,10 @@ namespace BookStore.Repositories.Implementation
         public ProductTypeRepository(BookStoreDbContext context) : base(context)
         {
         }
+
+        public ProductType GetProductTypeByName(ProductTypeEnum typeName)
+        {
+            return context.ProductTypes.SingleOrDefault(p => p.Name == typeName);
+        }
     }
 }

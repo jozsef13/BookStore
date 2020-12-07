@@ -50,6 +50,15 @@
                                 </li>
                                 <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
                             </ul>
+                            @if (TempData["Success"] != null)
+                            {
+                                <script>
+                                    window.onload = function () {
+                                        alert("@TempData["Success"]");
+                                        setTimeout(2000);
+                                    };
+                                </script>
+                            }
                         </div>
                     </div>
                 </div>
@@ -60,12 +69,12 @@
             <div class="container">
                 <ul class="site-menu js-clone-nav d-none d-md-block">
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a href="movies.html">Books</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Books" asp-action="Index">Books</a></li>
                     <li class="nav-item"><a href="contact.html">Contact</a></li>
                     <li class="col-4 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                        <form action="" class="site-block-top-search">
+                        <form asp-controller="Books" asp-action="Search" class="site-block-top-search">
                             <span class="icon icon-search2"></span>
-                            <input type="text" class="form-control border-0" placeholder="Search">
+                            <input type="text" class="form-control border-0" name = "name" placeholder="Search">
                         </form>
                     </li>
                 </ul>

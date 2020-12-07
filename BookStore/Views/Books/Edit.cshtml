@@ -1,0 +1,119 @@
+﻿@model CreateBookViewModel
+
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a asp-controller="Books" asp-action="Index">Books</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Edit Book</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Edit Book: </h2>
+            </div>
+            <div class="col-md-10">
+                <form asp-action="EditSave" enctype="multipart/form-data">
+                    <div class="p-3 p-lg-5 border">
+                        <div class="form-group column">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Book.BookId" />
+                            <input type="hidden" asp-for="Book.CoverPhotoPath" />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Title">Title</label>
+                                <input asp-for="Book.Title" class="form-control" />
+                                <span asp-validation-for="Book.Title" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Author">Author</label>
+                                <input value="@Html.DisplayFor(b => b.Book.Author.LastName)" class="form-control" disabled/>
+                                <span asp-validation-for="Book.Author" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Category.Name">Category</label>
+                                <select class="form-control" asp-for="Book.Category.Name">
+                                    <option disabled selected> -- select a category -- </option>
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <option value="@category.Name">@category.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Book.Category.Name" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Type.Name">Type</label>
+                                <select class="form-control" asp-for="Book.Type.Name">
+                                    <option disabled selected> -- select a type -- </option>
+                                    @foreach (var type in Model.Types)
+                                    {
+                                        <option value="@type.Name">@type.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Book.Type.Name" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Publisher.Name">Publisher</label>
+                                <select class="form-control" asp-for="Book.Publisher.Name" disabled>
+                                    <option disabled selected> -- select a publisher -- </option>
+                                    @foreach (var publisher in Model.Publishers)
+                                    {
+                                        <option value="@publisher.Name">@publisher.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Book.Publisher.Name" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Description">Description</label>
+                                <input type="text" asp-for="Book.Description" class="form-control">
+                                <span asp-validation-for="Book.Description" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Price">Price</label>
+                                <input step=".01" min="1" type="number" asp-for="Book.Price" class="form-control">
+                                <span asp-validation-for="Book.Price" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Quantity">Quantity</label>
+                                <input min="1" type="number" asp-for="Book.Quantity" class="form-control">
+                                <span asp-validation-for="Book.Quantity" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.Year">Year</label>
+                                <input min="1" max="2020" type="number" asp-for="Book.Year" class="form-control">
+                                <span asp-validation-for="Book.Year" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-10">
+                                <label asp-for="Book.CoverPhotoPath">Cover Photo</label>
+                                <input type="file" asp-for="Book.CoverPhotoPath" class="form-control">
+                                <span asp-validation-for="Book.CoverPhotoPath" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="col-md-4" align="right">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Edit</button>
+                            </div>
+                            <br />
+                            <div class="col-md-4" align="right">
+                                <a class="btn btn-primary btn-lg btn-block" asp-controller="Books" asp-action="Index">Go Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

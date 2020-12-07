@@ -12,5 +12,10 @@ namespace BookStore.Repositories.Implementation
     {
         public AuthorRepository(BookStoreDbContext context) : base(context)
         { }
+
+        public Author GetAuthorByName(string authorFirstName, string authorLastName)
+        {
+            return context.Authors.SingleOrDefault(a => a.FirstName == authorFirstName && a.LastName == authorLastName);
+        }
     }
 }

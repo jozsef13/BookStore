@@ -8,5 +8,6 @@ namespace BookStore.Repositories.Interface
 {
     public interface IAuthorRepository : IRepository<Author>
     {
+        Author GetAuthorByName(string authorFirstName, string authorLastName);
     }
 }

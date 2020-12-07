@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model List<Book> 
+<!DOCTYPE html>
 <html lang="en">
 <body>
   <div class="site-wrap">
@@ -10,7 +11,7 @@
             <div class="intro-text text-center text-md-left">
                 <p style="color:white;">“A great book should leave you with many experiences, and slightly exhausted at the end. You live several lives while reading.”</p>
               <p>
-                <a href="#" class="btn btn-sm btn-primary">Books</a>
+                <a asp-area="" asp-controller="Books" asp-action="Index" class="btn btn-sm btn-primary">Books</a>
               </p>
             </div>
           </div>
@@ -22,144 +23,37 @@
         <br />
         <div class="container">
             <div class="row mb-5">
-                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                        <figure class="block-4-image">
-                            <a href="singlemovie.html"><img style="width:500px;height:300px;" src="images/movie.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4">
-                            <h3><a href="singlemovie.html">Avengers</a></h3>
-                            <br>
-                            <p align="left">Running time: </p>
-                            <p align="left">Starring: </p>
-                            <p align="left">Genre: </p>
-                            <p align="left" class="mb-0 rated">
-                                <span>Rating:</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </p>
+                @foreach (var element in Model)
+                {
+                    <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                        <div class="block-4 text-center border">
+                            <figure class="block-4-image">
+                                <a asp-controller="Books" asp-action="Details" asp-route-id="@element.BookId"><img style="width:500px;height:300px;" src="@Url.Content(element.CoverPhotoPath)" alt="Image placeholder" class="img-fluid"></a>
+                            </figure>
+                            <div class="block-4-text p-4">
+                                <h3><a asp-controller="Books" asp-action="Details" asp-route-id="@element.BookId">@element.Title</a></h3>
+                                <h3>@element.Author.FirstName @element.Author.LastName</h3>
+                                @*<p class="mb-0 rated">
+                                    <span>Rating:</span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>*@
+                                <p><strong class="text-primary h4">$@element.Price</strong></p>
+                                @if (User.IsInRole("User"))
+                                {
+                                    <p><a asp-controller="Cart" asp-action="AddToCart" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+                                }
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <p><a asp-controller="Books" asp-action="Edit" asp-route-id="@element.BookId" class="buy-now btn btn-sm btn-primary">Edit</a></p>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                        <figure class="block-4-image">
-                            <a href="singlemovie.html"><img style="width:500px;height:300px;" src="images/movie.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4">
-                            <h3><a href="singlemovie.html">Avengers</a></h3>
-                            <br>
-                            <p align="left">Running time: </p>
-                            <p align="left">Starring: </p>
-                            <p align="left">Genre: </p>
-                            <p align="left" class="mb-0 rated">
-                                <span>Rating:</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                        <figure class="block-4-image">
-                            <a href="singlemovie.html"><img style="width:500px;height:300px;" src="images/movie.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4">
-                            <h3><a href="singlemovie.html">Avengers</a></h3>
-                            <br>
-                            <p align="left">Running time: </p>
-                            <p align="left">Starring: </p>
-                            <p align="left">Genre: </p>
-                            <p align="left" class="mb-0 rated">
-                                <span>Rating:</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                        <figure class="block-4-image">
-                            <a href="singlemovie.html"><img style="width:500px;height:300px;" src="images/movie.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4">
-                            <h3><a href="singlemovie.html">Avengers</a></h3>
-                            <br>
-                            <p align="left">Running time: </p>
-                            <p align="left">Starring: </p>
-                            <p align="left">Genre: </p>
-                            <p align="left" class="mb-0 rated">
-                                <span>Rating:</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                        <figure class="block-4-image">
-                            <a href="singlemovie.html"><img style="width:500px;height:300px;" src="images/movie.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4">
-                            <h3><a href="singlemovie.html">Avengers</a></h3>
-                            <br>
-                            <p align="left">Running time: </p>
-                            <p align="left">Starring: </p>
-                            <p align="left">Genre: </p>
-                            <p align="left" class="mb-0 rated">
-                                <span>Rating:</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                        <figure class="block-4-image">
-                            <a href="singlemovie.html"><img style="width:500px;height:300px;" src="images/movie.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4">
-                            <h3><a href="singlemovie.html">Avengers</a></h3>
-                            <br>
-                            <p align="left">Running time: </p>
-                            <p align="left">Starring: </p>
-                            <p align="left">Genre: </p>
-                            <p align="left" class="mb-0 rated">
-                                <span>Rating:</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+                }
             </div>
         </div>
 

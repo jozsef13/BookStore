@@ -13,5 +13,10 @@ namespace BookStore.Repositories.Implementation
         public CategoryRepository(BookStoreDbContext context) : base(context)
         {
         }
+
+        public Category GetCategoryByName(CategoryEnum categoryName)
+        {
+            return context.Categories.SingleOrDefault(c => c.Name == categoryName);
+        }
     }
 }

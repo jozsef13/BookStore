@@ -1,0 +1,55 @@
+﻿@model BookStore.Models.Book
+
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a asp-controller="Books" asp-action="Index">Movies</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">@Model.Title</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <img style="width:500px;height:500px;" src="@Url.Content(Model.CoverPhotoPath)">
+            <div class="col-md-6">
+                <h2 class="text-black">@Model.Title</h2>
+                <p><b>Author: </b>@Model.Author.FirstName @Model.Author.LastName</p>
+                <p><b>Type: </b>@Model.Type.Name</p>
+                <p><b>Category: </b>@Model.Category.Name</p>
+                <p><b>Publisher: </b>@Model.Publisher.Name</p>
+                <p><b>Year: </b>@Model.Year</p>
+                <p><strong class="text-primary h4">$@Model.Price</strong></p>
+                <div class="mb-5">
+                    <div class="input-group mb-3" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+
+                        </div>
+                    </div>
+                    @if (User.IsInRole("User"))
+                    {
+                        <p><a asp-controller="Cart" asp-action="AddToCart" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <br />
+                        <p>
+                            <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model.BookId" class="buy-now btn btn-sm btn-danger">Remove movie</a>
+                            <a asp-controller="Books" asp-action="Edit" asp-route-id="@Model.BookId" class="buy-now btn btn-sm btn-primary">Edit movie</a>
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+        <br />
+        <p class="mb-3 h5 text-uppercase text-black d-block">DESCRIPTION</p>
+        <p>
+            @Model.Description
+        </p>
+    </div>
+</div>

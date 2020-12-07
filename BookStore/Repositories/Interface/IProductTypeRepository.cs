@@ -8,5 +8,6 @@ namespace BookStore.Repositories.Interface
 {
     public interface IProductTypeRepository : IRepository<ProductType>
     {
+        ProductType GetProductTypeByName(ProductTypeEnum typeName);
     }
 }

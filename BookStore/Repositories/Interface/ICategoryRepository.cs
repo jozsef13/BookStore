@@ -8,5 +8,6 @@ namespace BookStore.Repositories.Interface
 {
     public interface ICategoryRepository : IRepository<Category>
     {
+        Category GetCategoryByName(CategoryEnum categoryName);
     }
 }
