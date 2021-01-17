@@ -10,8 +10,12 @@ namespace BookStore.Repositories.Implementation
 {
     public class BookRepository : BaseRepository<Book>, IBookRepository
     {
-        public BookRepository(BookStoreDbContext context) : base(context)
-        { }
+        private IReviewRepository reviewRepository;
+
+        public BookRepository(BookStoreDbContext context, IReviewRepository reviewRepository) : base(context)
+        {
+            this.reviewRepository = reviewRepository;
+        }
 
         public List<Book> GetBookByName(string name)
         {
@@ -28,6 +32,7 @@ namespace BookStore.Repositories.Implementation
                 iBook.Category = context.Categories.Find(iBook.CategoryId);
                 iBook.Type = context.ProductTypes.Find(iBook.ProductTypeId);
                 iBook.Publisher = context.Publishers.Find(iBook.PublisherId);
+                iBook.Reviews = reviewRepository.GetReviewsByBookId(iBook.BookId);
             }
 
             return returnedBooks;
@@ -43,6 +48,7 @@ namespace BookStore.Repositories.Implementation
                 iBook.Category = context.Categories.Find(iBook.CategoryId);
                 iBook.Type = context.ProductTypes.Find(iBook.ProductTypeId);
                 iBook.Publisher = context.Publishers.Find(iBook.PublisherId);
+                iBook.Reviews = reviewRepository.GetReviewsByBookId(iBook.BookId);
             }
 
             return returnedBooks;
@@ -58,6 +64,7 @@ namespace BookStore.Repositories.Implementation
                 iBook.Category = context.Categories.Find(iBook.CategoryId);
                 iBook.Type = context.ProductTypes.Find(iBook.ProductTypeId);
                 iBook.Publisher = context.Publishers.Find(iBook.PublisherId);
+                iBook.Reviews = reviewRepository.GetReviewsByBookId(iBook.BookId);
             }
 
             return returnedBooks;

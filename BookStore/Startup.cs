@@ -40,6 +40,7 @@ namespace BookStore
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartBookRepository, CartBookRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductTypeRepository, ProductTypeRepository>();

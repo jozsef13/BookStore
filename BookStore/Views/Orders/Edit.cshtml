@@ -1,0 +1,50 @@
+﻿@model BookStore.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditAction" asp-route-id="@Model.OrderId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderId" />
+            <div class="form-group">
+                <label asp-for="OrderStatus">Status</label>
+                <select class="form-control" id="orderStatus" name="orderStatus">
+                    <option disabled selected> -- select a status -- </option>
+                    <option value="@Order.Status.Placed" id="orderStatus">@Order.Status.Placed</option>
+                    <option value="@Order.Status.Approved"  id="orderStatus">@Order.Status.Approved</option>
+                    <option value="@Order.Status.Delivered"  id="orderStatus">@Order.Status.Delivered</option>
+                </select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPrice" class="control-label"></label>
+                <input asp-for="TotalPrice" class="form-control" readonly/>
+                <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingDate" class="control-label"></label>
+                <input asp-for="ShippingDate" class="form-control"  readonly/>
+                <span asp-validation-for="ShippingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input class="form-control" value="@Model.User.UserName" readonly />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AdminIndex">Back to List</a>
+</div>

@@ -10,7 +10,7 @@ namespace BookStore.Models
         public Guid ReviewId { get; set; }
         public string ReviewText { get; set; }
         public string ReviewTitle { get; set; }
-        private double Rating { get; set; }
+        public int Rating { get; set; }
 
         public string UserName { get; set; }
         public BookStoreUser User { get; set; }

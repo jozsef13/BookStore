@@ -50,7 +50,6 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public IActionResult Details(Guid id)
         {
             var sBook = _bookService.GetBookById(id);

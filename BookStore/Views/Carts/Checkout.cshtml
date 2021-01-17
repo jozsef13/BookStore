@@ -1,0 +1,105 @@
+﻿@model Cart
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a> <span class="mx-2 mb-0">/</span> <a asp-controller="Carts" asp-action="Index">Cart</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Checkout</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <h2 class="h3 mb-3 text-black">Billing Details</h2>
+                    <div class="p-3 p-lg-5 border">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                                <input readonly type="text" class="form-control" id="c_fname" name="c_fname" value="@Model.User.FirstName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                                <input readonly type="text" class="form-control" id="c_lname" name="c_lname" value="@Model.User.LastName">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+                                <input readonly type="text" class="form-control" id="c_address" name="c_address" value="@Model.User.Address" placeholder="Street address">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-5">
+                            <div class="col-md-6">
+                                <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+                                <input readonly type="text" class="form-control" id="c_email_address" value="@Model.User.Email" name="c_email_address">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                                <input readonly type="text" class="form-control" id="c_phone" name="c_phone" value="@Model.User.PhoneNumber" placeholder="Phone Number">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h5>If you want to change billing details click the button below to go to your account and modify the details!</h5>
+                            <a class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Manage/Index">Modify Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h2 class="h3 mb-3 text-black">Your Order</h2>
+                            <div class="p-3 p-lg-5 border">
+                                <table class="table site-block-order-table mb-5">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cartBook in Model.CartBooks)
+                                        {
+                                            <tr>
+                                                <td>@cartBook.Book.Title <strong class="mx-2">x</strong>@cartBook.BookQuantity</td>
+                                                <td>$@(cartBook.Book.Price * cartBook.BookQuantity)</td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                            <td class="text-black font-weight-bold"><strong>$@Model.TotalPrice</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <form asp-controller="Orders" asp-action="PlaceOrder">
+                                    <fieldset id="paymentMethod">
+                                        <div class="border p-3 mb-3">
+                                            <input type="radio" id="cash" name="paymentMethod" value="Cash" checked>
+                                            <label for="cash">Cash</label>
+                                        </div>
+
+                                        <div class="border p-3 mb-3">
+                                            <input type="radio" id="card" name="paymentMethod" value="Card">
+                                            <label for="card">Card</label>
+                                        </div>
+
+                                        <div class="border p-3 mb-5">
+                                            <input type="radio" id="paypal" name="paymentMethod" value="PayPal">
+                                            <label for="paypal">PayPal</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block">Place Order</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

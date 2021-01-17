@@ -1,41 +1,90 @@
-﻿@model IEnumerable<BookStore.Models.Cart>
+﻿@model Cart
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
+        </div>
+    </div>
+</div>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <form class="col-md-12" method="post">
+                <div class="site-blocks-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="product-thumbnail">Cover</th>
+                                <th class="product-name">Title</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-total">Total</th>
+                                <th class="product-remove">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var cartBook in Model.CartBooks)
+                            {
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <a asp-controller="Books" asp-action="Details" asp-route-id="@cartBook.BookId"><img style="width:400px;height:200px;" src="@cartBook.Book.CoverPhotoPath" alt="Image" class="img-fluid"></a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a asp-controller="Books" asp-action="Details" asp-route-id="@cartBook.BookId"><h2 class="h5 text-black">@cartBook.Book.Title</h2></a>
+                                    </td>
+                                    <td>@cartBook.Book.Price$</td>
+                                    <td>
+                                        <div class="input-group mb-3" style="max-width: 120px;">
+                                            <a asp-controller="Carts" asp-action="RemoveOneBook" asp-route-bookId="@cartBook.Book.BookId" class="btn btn-outline-primary" type="button">&minus;</a>
+                                            <input type="text" readonly class="form-control text-center" value="@cartBook.BookQuantity">
+                                            <a asp-controller="Carts" asp-action="AddOneBook" asp-route-bookId="@cartBook.Book.BookId" class="btn btn-outline-primary" type="button">&plus;</a>
+                                        </div>
 
-<h1>Index</h1>
+                                    </td>
+                                    <td>@(cartBook.Book.Price * cartBook.BookQuantity)$</td>
+                                    <td><a asp-controller="Carts" asp-action="RemoveBook" asp-route-bookId="@cartBook.Book.BookId" class="btn btn-primary btn-sm">X</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <a class="btn btn-outline-primary btn-sm btn-block" asp-controller="Books" asp-action="Index">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pl-5">
+                <div class="row justify-content-end">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12 text-right border-bottom mb-5">
+                                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <span class="text-black">Total</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">@Model.TotalPrice$</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a asp-controller="Carts" asp-action="Checkout" class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

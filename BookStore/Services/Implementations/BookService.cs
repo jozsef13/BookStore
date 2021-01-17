@@ -15,14 +15,16 @@ namespace BookStore.Services.Implementations
         private IProductTypeRepository typeRepository;
         private ICategoryRepository categoryRepository;
         private IPublisherRepository publisherRepository;
+        private IReviewRepository reviewRepository;
 
-        public BookService(IBookRepository bookRepository, IAuthorRepository authorRepository, IProductTypeRepository typeRepository, ICategoryRepository categoryRepository, IPublisherRepository publisherRepository)
+        public BookService(IBookRepository bookRepository, IAuthorRepository authorRepository, IProductTypeRepository typeRepository, ICategoryRepository categoryRepository, IPublisherRepository publisherRepository, IReviewRepository reviewRepository)
         {
             this.bookRepository = bookRepository;
             this.authorRepository = authorRepository;
             this.typeRepository = typeRepository;
             this.categoryRepository = categoryRepository;
             this.publisherRepository = publisherRepository;
+            this.reviewRepository = reviewRepository;
         }
 
         public void CreateBook(string title, string description, double price, int quantity, string photoPath, int year, ProductTypeEnum typeName,
@@ -52,7 +54,8 @@ namespace BookStore.Services.Implementations
                 throw new Exception("The publisher does not exist!");
             }
 
-            Book newBook = new Book { BookId = Guid.NewGuid(), Author = author, Description = description, Category = category, CoverPhotoPath = photoPath, Price = price, Publisher = publisher, Title = title, Quantity = quantity, Year = year, Type = type };
+            Book newBook = new Book { BookId = Guid.NewGuid(), Author = author, Description = description, Category = category, 
+                CoverPhotoPath = photoPath, Price = price, Publisher = publisher, Title = title, Quantity = quantity, Year = year, Type = type };
             bookRepository.Add(newBook);
         }
 
@@ -71,6 +74,7 @@ namespace BookStore.Services.Implementations
                 iBook.Category = categoryRepository.GetById(iBook.CategoryId);
                 iBook.Type = typeRepository.GetById(iBook.ProductTypeId);
                 iBook.Publisher = publisherRepository.GetById(iBook.PublisherId);
+                iBook.Reviews = reviewRepository.GetReviewsByBookId(iBook.BookId);
             }
 
             return books;
@@ -88,6 +92,8 @@ namespace BookStore.Services.Implementations
             iBook.Category = categoryRepository.GetById(iBook.CategoryId);
             iBook.Type = typeRepository.GetById(iBook.ProductTypeId);
             iBook.Publisher = publisherRepository.GetById(iBook.PublisherId);
+            iBook.Reviews = reviewRepository.GetReviewsByBookId(iBook.BookId);
+
             return iBook;
         }
 

@@ -1,0 +1,87 @@
+﻿@model Order
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a asp-controller="Home" asp-action="Index">Home</a> <span class="mx-2 mb-0">/</span> <a asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Order Status</strong></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container px-1 px-md-4 py-5 mx-auto">
+    <div class="card">
+        <div class="row d-flex justify-content-between px-3 top">
+            <div class="d-flex">
+                <h5>ORDER</h5>
+            </div>
+            <div class="d-flex flex-column text-sm-right">
+                <p class="mb-0">Expected Arrival <span>@Model.ShippingDate.Value.ToString("dd/MM/yyyy")</span></p>
+            </div>
+        </div>
+        <center>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12">
+                    <ul id="progressbar" class="text-center">
+                        @{ 
+                            if(Model.OrderStatus.Equals(Order.Status.Placed))
+                            {
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                            } else if (Model.OrderStatus.Equals(Order.Status.Approved))
+                            {
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                            } else if (Model.ShippingDate.Equals(DateTime.Today))
+                            {
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                            } else
+                            {
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                            }
+                        }
+                    
+                    </ul>
+                </div>
+            </div>
+        </center>
+        <div class="row justify-content-between top">
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Placed</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Approved</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/TkPm63y.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>On the way </p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/HdsziHP.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Delivered</p>
+                </div>
+            </div>
+
+        </div>
+
+        <p align="center"><a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId" class="buy-now btn btn-sm btn-primary">See order details</a></p>
+    </div>
+</div>

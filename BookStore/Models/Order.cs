@@ -14,6 +14,13 @@ namespace BookStore.Models
             Delivered
         }
 
+        public enum PaymentMethods
+        {
+            Paypal,
+            Cash,
+            Card
+        }
+
         public Guid OrderId { get; set; }
         public Status OrderStatus { get; set; }
         public double TotalPrice { get; set; }
@@ -22,5 +29,6 @@ namespace BookStore.Models
         public string UserName { get; set; }
         public BookStoreUser User { get; set; }
         public virtual ICollection<OrderBook> OrderBooks { get; set; }
+        public PaymentMethods PaymentMethod { get; set; }
     }
 }

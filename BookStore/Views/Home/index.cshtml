@@ -28,26 +28,88 @@
                     <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                         <div class="block-4 text-center border">
                             <figure class="block-4-image">
-                                <a asp-controller="Books" asp-action="Details" asp-route-id="@element.BookId"><img style="width:500px;height:300px;" src="@Url.Content(element.CoverPhotoPath)" alt="Image placeholder" class="img-fluid"></a>
+                                <a asp-controller="Books" asp-action="Details" asp-route-id="@element.BookId"><img style="width:500px;height:250px;" src="@Url.Content(element.CoverPhotoPath)" alt="Image placeholder" class="img-fluid"></a>
                             </figure>
                             <div class="block-4-text p-4">
                                 <h3><a asp-controller="Books" asp-action="Details" asp-route-id="@element.BookId">@element.Title</a></h3>
                                 <h3>@element.Author.FirstName @element.Author.LastName</h3>
-                                @*<p class="mb-0 rated">
-                                    <span>Rating:</span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p>*@
-                                <p><strong class="text-primary h4">$@element.Price</strong></p>
-                                @if (User.IsInRole("User"))
-                                {
-                                    <p><a asp-controller="Cart" asp-action="AddToCart" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+                                @{
+                                    double averageRating = 0;
+                                    int sum = 0;
+                                    if (element.Reviews.Any())
+                                    {
+                                        foreach (Review review in element.Reviews)
+                                        {
+                                            sum += review.Rating;
+                                        }
+
+                                        averageRating = sum / element.Reviews.Count();
+                                    }
+                                    <p class="mb-0 rated">
+                                        <span>Rating:</span>
+                                        @if (averageRating == 0)
+                                        {
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        else if (averageRating >= 1 && averageRating < 2)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        else if (averageRating >= 2 && averageRating < 3)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        else if (averageRating >= 3 && averageRating < 4)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        else if (averageRating >= 4 && averageRating < 5)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        else if (averageRating == 5)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                    </p>
                                 }
+                                <p><strong class="text-primary h4">$@element.Price</strong></p>
+                                <form asp-action="AddToCart" asp-controller="Carts" asp-route-bookId="@element.BookId">
+                                    <div class="input-group mb-3" style="max-width: 120px;">
+                                        <input hidden type="number" id="quantity" name="quantity" class="form-control text-center" min="1" value="1" aria-describedby="button-addon1" />
+                                    </div>
+                                    @if (User.IsInRole("User"))
+                                    {
+                                        <button type="submit" class="buy-now btn btn-sm btn-primary">Add to cart</button>
+                                    }
+                                </form>
                                 @if (User.IsInRole("Administrator"))
                                 {
+                                    <br />
                                     <p><a asp-controller="Books" asp-action="Edit" asp-route-id="@element.BookId" class="buy-now btn btn-sm btn-primary">Edit</a></p>
                                 }
                             </div>

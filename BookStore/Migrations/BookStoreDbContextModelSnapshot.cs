@@ -203,6 +203,9 @@ namespace BookStore.Migrations
                     b.Property<Guid>("CartId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("BookQuantity")
+                        .HasColumnType("int");
+
                     b.HasKey("BookId", "CartId");
 
                     b.HasIndex("CartId");
@@ -227,112 +230,112 @@ namespace BookStore.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = new Guid("31bfc90f-9923-43bb-a280-754d5e893f97"),
+                            CategoryId = new Guid("8bf6a0cf-15fc-4462-b99c-12a87c91701f"),
                             Name = "Action"
                         },
                         new
                         {
-                            CategoryId = new Guid("02adec7f-b3d8-4de1-81b6-f4c712b66925"),
+                            CategoryId = new Guid("3264f7ef-e4cf-4983-8608-58757b2afe8c"),
                             Name = "Adventure"
                         },
                         new
                         {
-                            CategoryId = new Guid("850f22fe-1307-45e1-93f9-b2a7fb28a663"),
+                            CategoryId = new Guid("eefe9e93-aa91-45bc-afd3-e7a8ae3f3254"),
                             Name = "Horror"
                         },
                         new
                         {
-                            CategoryId = new Guid("223b3e6d-fd09-43e3-8b08-cdbc018dfc82"),
+                            CategoryId = new Guid("07fd2759-3c2c-4f43-b954-86ec42a8c996"),
                             Name = "History"
                         },
                         new
                         {
-                            CategoryId = new Guid("7ee6b1a6-1f7b-40e5-938e-e93a4b49c586"),
+                            CategoryId = new Guid("0fa3c382-6275-4f86-ad0b-d9200169374e"),
                             Name = "Crime"
                         },
                         new
                         {
-                            CategoryId = new Guid("68dc281a-5baa-4346-9416-2863d084b9d2"),
+                            CategoryId = new Guid("5a11d25f-2a2d-48cb-afe6-be3cb6d7d590"),
                             Name = "Drama"
                         },
                         new
                         {
-                            CategoryId = new Guid("acd011b4-7c4c-4d5f-8a92-cd91e60ff626"),
+                            CategoryId = new Guid("e118371c-7062-4f04-9d1e-1cf2fb8a987c"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            CategoryId = new Guid("36f56609-66f8-454f-9787-c0f743a8617d"),
+                            CategoryId = new Guid("f6a7e078-ca64-4145-981f-b24979eebf8e"),
                             Name = "SF"
                         },
                         new
                         {
-                            CategoryId = new Guid("784e34b1-0c60-4caf-81c2-e9704be950c1"),
+                            CategoryId = new Guid("878451fa-033c-44e5-be98-1b4e5bfa64e6"),
                             Name = "Mystery"
                         },
                         new
                         {
-                            CategoryId = new Guid("041a9e3d-999a-42bf-8c7a-243c0475c2e6"),
+                            CategoryId = new Guid("43c0be4e-8739-43a0-a4ba-6ebe48068eef"),
                             Name = "Poetry"
                         },
                         new
                         {
-                            CategoryId = new Guid("5445ba7f-1923-4090-b6dc-2815660f9a31"),
+                            CategoryId = new Guid("97301611-81de-4042-a890-221abab16c03"),
                             Name = "Romance"
                         },
                         new
                         {
-                            CategoryId = new Guid("82c4e235-e530-4cfc-834e-918e573bd54f"),
+                            CategoryId = new Guid("43a2977a-0c70-405c-aa12-aa4cf5e4b312"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            CategoryId = new Guid("6946465c-5e58-437a-b6dc-5c85d0ed453f"),
+                            CategoryId = new Guid("3b59b141-ea62-4cc1-adb3-93aa1d6a1515"),
                             Name = "Thriller"
                         },
                         new
                         {
-                            CategoryId = new Guid("3fa49dc6-1081-4553-88c6-f39b5ad55b03"),
+                            CategoryId = new Guid("f0eaddbf-8319-4096-8168-cb48edd6cd51"),
                             Name = "Biography"
                         },
                         new
                         {
-                            CategoryId = new Guid("6f63e3d8-79f5-4a8b-830c-abfc27b979d8"),
+                            CategoryId = new Guid("d88560fe-c235-4d8c-97ad-421ce9c25d29"),
                             Name = "Autobiography"
                         },
                         new
                         {
-                            CategoryId = new Guid("0732a5bc-7551-4743-bcd9-6bafff942652"),
+                            CategoryId = new Guid("5f73736a-84a8-4af7-b609-8638689f7159"),
                             Name = "Encyclopedia"
                         },
                         new
                         {
-                            CategoryId = new Guid("337b89a0-2acb-40fa-b67d-171dcc02cc6b"),
+                            CategoryId = new Guid("1b82388c-ccef-461a-92a1-0421d15638c9"),
                             Name = "Health"
                         },
                         new
                         {
-                            CategoryId = new Guid("8039c53c-bb4e-4896-a870-2e037b85a9a3"),
+                            CategoryId = new Guid("6e24ea51-a6b1-49b1-814c-0a36602cb132"),
                             Name = "Journal"
                         },
                         new
                         {
-                            CategoryId = new Guid("d12b747e-d48e-4606-9842-9c6572e0cd64"),
+                            CategoryId = new Guid("41a96004-5343-4e04-99cb-486f80697c03"),
                             Name = "Memoir"
                         },
                         new
                         {
-                            CategoryId = new Guid("9cb80243-9fc4-4a28-967d-37510574ef7c"),
+                            CategoryId = new Guid("27130438-e060-4ba9-9adc-b3668637cc87"),
                             Name = "Philosophy"
                         },
                         new
                         {
-                            CategoryId = new Guid("bd654032-bbdc-4850-9794-bf9088d284db"),
+                            CategoryId = new Guid("d592e92c-65c5-450d-82a5-37321a4010cf"),
                             Name = "Science"
                         },
                         new
                         {
-                            CategoryId = new Guid("2bb5888a-71d2-4858-8d6d-3e409193855b"),
+                            CategoryId = new Guid("7d1f4de3-aa01-4509-b93d-b3b6eaa2ad8c"),
                             Name = "Travel"
                         });
                 });
@@ -346,6 +349,9 @@ namespace BookStore.Migrations
                     b.Property<string>("OrderStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
@@ -371,6 +377,9 @@ namespace BookStore.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("BookQuantity")
+                        .HasColumnType("int");
+
                     b.HasKey("BookId", "OrderId");
 
                     b.HasIndex("OrderId");
@@ -395,12 +404,12 @@ namespace BookStore.Migrations
                     b.HasData(
                         new
                         {
-                            ProductTypeId = new Guid("6473ba07-650a-44e9-8547-4ffc986d34db"),
+                            ProductTypeId = new Guid("8289e4bf-0e3b-47a5-b763-6de6e3274574"),
                             Name = "PhysicalBook"
                         },
                         new
                         {
-                            ProductTypeId = new Guid("11dc29d2-6113-4925-ba8c-c56aea5739f7"),
+                            ProductTypeId = new Guid("1e33d24d-d947-44e3-8938-38cfc7d5be79"),
                             Name = "Ebook"
                         });
                 });
@@ -430,6 +439,9 @@ namespace BookStore.Migrations
 
                     b.Property<Guid>("BookId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReviewText")
                         .HasColumnType("nvarchar(max)");
@@ -479,14 +491,14 @@ namespace BookStore.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "440ca61f-4385-4f2a-b87b-184dde5a3256",
+                            ConcurrencyStamp = "62ed7c9c-9c72-469a-b85b-2890b38715fe",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "a3840f85-7505-458c-865c-9be2be00043e",
+                            ConcurrencyStamp = "3eb76820-7f4d-48c6-aacd-ca53bb05b5c6",
                             Name = "Administrator",
                             NormalizedName = "Admin"
                         });

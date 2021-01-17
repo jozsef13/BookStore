@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BookStore.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a asp-controller="Home" asp-action="Index">Home</a> <span class="mx-2 mb-0">/</span> <a asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Orders</strong></div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Status
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Shipping Date
+            </th>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th>
+                    User
+                </th>
+            }
+            <th>
+                Payment Method
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @item.ShippingDate.Value.ToString("dd/MM/yyyy")
+            </td>
+            @if (User.IsInRole("Administrator"))
+            {
+                <td>
+                    @item.User.FirstName @item.User.LastName
+                </td>
+            }
+            <td>
+                @item.PaymentMethod
+            </td>
+            <td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a>
+                }
+                |
+                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

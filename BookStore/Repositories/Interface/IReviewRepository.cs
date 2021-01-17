@@ -8,5 +8,8 @@ namespace BookStore.Repositories.Interface
 {
     public interface IReviewRepository : IRepository<Review>
     {
+        ICollection<Review> GetReviewsByBookId(Guid bookId);
+        List<Review> GetReviewsByUserId(string id);
+        List<Review> GetAllReviews();
     }
 }

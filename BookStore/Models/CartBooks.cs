@@ -8,5 +8,6 @@ namespace BookStore.Models
         public Cart Cart { get; set; }
         public Guid BookId { get; set; }
         public Book Book { get; set; }
+        public int BookQuantity { get; set; }
     }
 }

@@ -21,27 +21,27 @@
                 <p><b>Year: </b>@Model.Year</p>
                 <p><strong class="text-primary h4">$@Model.Price</strong></p>
                 <div class="mb-5">
-                    <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-
-                        </div>
-                    </div>
-                    @if (User.IsInRole("User"))
-                    {
-                        <p><a asp-controller="Cart" asp-action="AddToCart" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
-                    }
+                    <form asp-action="AddToCart" asp-controller="Carts" asp-route-bookId="@Model.BookId">
+                        @if (User.IsInRole("User"))
+                        {
+                            <div class="input-group mb-3" style="max-width: 120px;">
+                                <input type="number" id="quantity" name="quantity" class="form-control text-center" min="1" value="1" aria-describedby="button-addon1" />
+                            </div>
+                            <button type="submit" class="buy-now btn btn-sm btn-primary">Add to cart</button>
+                        }
+                    </form>
                     @if (User.IsInRole("Administrator"))
                     {
                         <br />
                         <p>
-                            <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model.BookId" class="buy-now btn btn-sm btn-danger">Remove movie</a>
-                            <a asp-controller="Books" asp-action="Edit" asp-route-id="@Model.BookId" class="buy-now btn btn-sm btn-primary">Edit movie</a>
+                            <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model.BookId" class="buy-now btn btn-sm btn-danger">Remove book</a>
+                            <a asp-controller="Books" asp-action="Edit" asp-route-id="@Model.BookId" class="buy-now btn btn-sm btn-primary">Edit book</a>
                         </p>
+                    }
+                    @if (User.IsInRole("User"))
+                    {
+                        <br />
+                        <a asp-controller="Reviews" asp-action="AddReview" asp-route-bookId="@Model.BookId" class="buy-now btn btn-sm btn-primary">Add review</a>
                     }
                 </div>
             </div>
@@ -51,5 +51,46 @@
         <p>
             @Model.Description
         </p>
+
+        <div class="site-section block-3 site-blocks-2 bg-light">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-7 site-section-heading text-center pt-4">
+                        <h2>Reviews</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="nonloop-block-3 owl-carousel">
+                            @foreach (Review review in Model.Reviews)
+                            {
+                                <div class="item">
+                                    <div class="block-4">
+                                        <div class="block-4-text p-2">
+                                            <b>User: </b> @review.User.FirstName @review.User.LastName
+                                        </div>
+                                        <div class="block-4-text p-2">
+                                            <b>Rating: </b> @review.Rating
+                                        </div>
+                                        <div class="block-4-text p-2">
+                                            <b>Review Title: </b> @review.ReviewTitle
+                                        </div>
+                                        <div class="block-4-text p-2">
+                                            <b>Review: </b> @review.ReviewText
+                                        </div>
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <div class="block-4-text p-2">
+                                                <b><a asp-controller="Users" asp-action="Ban" asp-route-userId="@review.User.Id">Ban user</a></b>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

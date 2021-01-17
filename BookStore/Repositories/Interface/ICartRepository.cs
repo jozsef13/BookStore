@@ -8,5 +8,9 @@ namespace BookStore.Repositories.Interface
 {
     public interface ICartRepository : IRepository<Cart>
     {
+        Cart GetByUserId(string id);
+        List<Book> getBooksFromCart(Cart oldCart);
+        bool isBookInCart(Book book, Cart oldCart);
+        CartBook GetCartBookByBookAndCart(Cart oldCart, Book book);
     }
 }

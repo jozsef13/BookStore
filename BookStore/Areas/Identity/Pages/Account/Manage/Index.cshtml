@@ -43,13 +43,17 @@
                         <div class="col-lg-12"><a asp-area="" asp-controller="Books" asp-action="Index"><button style="height: 40px; width: 220px;" class="btn btn-primary">Edit Books</button></a></div>
                         <br />
                         <div class="col-lg-12"><a asp-area="" asp-controller="Authors" asp-action="Index"><button style="height: 40px; width: 220px;" class="btn btn-primary">Edit Authors</button></a></div>
+                        <br />
+                        <div class="col-lg-12"><a asp-controller="Orders" asp-action="AdminIndex"><button style="height: 40px; width: 220px;" class="btn btn-primary">Manage Orders</button></a></div>
+                        <br />
+                        <div class="col-lg-12"><a asp-controller="Reviews" asp-action="AdminIndex"><button style="height: 40px; width: 220px;" class="btn btn-primary">Manage Reviews</button></a></div>
                     }
                     @if (User.IsInRole("User"))
                     {
                         <br />
-                        <div class="col-lg-12"><a id="delete" asp-page="DeletePersonalData"><button style="height: 40px; width: 220px;" class="btn btn-primary">Orders</button></a></div>
+                        <div class="col-lg-12"><a asp-controller="Orders" asp-action="UserIndex"><button style="height: 40px; width: 220px;" class="btn btn-primary">Orders</button></a></div>
                         <br />
-                        <div class="col-lg-12"><a id="delete" asp-page="DeletePersonalData"><button style="height: 40px; width: 220px;" class="btn btn-primary">Ebooks</button></a></div>
+                        <div class="col-lg-12"><a asp-controller="Reviews" asp-action="UserIndex"><button style="height: 40px; width: 220px;" class="btn btn-primary">Reviews</button></a></div>
                     }
                 </div>
                 <div class="col-md-6">

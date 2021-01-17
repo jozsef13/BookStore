@@ -90,7 +90,9 @@ namespace BookStore.Areas.Identity.Pages.Account
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    TempData["Success"] = "Your account is banned until " + user.LockoutEnd.ToString();
+                    return RedirectToPage("./");
                 }
                 else
                 {
